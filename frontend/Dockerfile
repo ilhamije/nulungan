@@ -1,15 +1,15 @@
 # Use an official node runtime as a parent image
 FROM node:latest
 
-WORKDIR /app/
+WORKDIR /home/node/app/
 
 # Install dependencies
-COPY package.json /app/
+COPY package.json /home/node/app/
 
-RUN npm install --legacy-peer-deps
+RUN npm install --legacy-peer-deps --unsafe-perm=true --allow-root
 
 # Add rest of the client code
-COPY . /app/
+COPY . /home/node/app/
 
 EXPOSE 3000
 

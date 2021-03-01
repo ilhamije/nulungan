@@ -1,8 +1,13 @@
 import os
+# import environ
 
 from .base import *
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+# env = environ.Env()
+# environ.Env.read_env()
+
+# # SECRET_KEY = os.environ.get("SECRET_KEY")
+# SECRET_KEY = env("SECRET_KEY")
 DEBUG = False
 ALLOWED_HOSTS = [os.environ.get("PRODUCTION_HOST")]
 

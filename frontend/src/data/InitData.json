@@ -1,0 +1,16 @@
+[
+    {
+        "_id": "593e929787f567dccda86910",
+        "index": 999,
+        "lapak_name": "Mas Initiative",
+        "lapak_type": "Olahan tepung",
+        "picture": "http://placekitten.com/200/200",
+        "city": "Tangerng",
+        "address": "265 Ocean Eyes",
+        "latitude": -33.943142,
+        "longitude": 151.25074,
+        "active": 1,
+        "valid": 0,
+        "socmed_link": ""
+    }
+]

@@ -1,0 +1,9 @@
+.my-default-style {
+    font-family: 'Roboto', sans-serif;
+    padding: 5px;
+    margin: 1em;
+ }
+
+ .my-default-style h1 {
+     color: #8b008b;
+ }

@@ -1,39 +1,159 @@
-import React from 'react';
-import logo from './logo.svg';
-import axios from 'axios';
+import React, { Component } from 'react';
+import { Container, Col, Row } from 'bootstrap';
 import './App.css';
 
-require('dotenv').config()
+import data from './data/InitData.json';
+import Header from './components/Header';
+import Card from './components/Card';
 
-function handleSubmit(event) {
-  const text = document.querySelector('#char-input').value
+// import jump from 'jump.js';
+// import { easeInOutCubic } from './utils/Easing';
 
-  axios
-    .get(`/char_count?text=${text}`).then(({data}) => {
-      document.querySelector('#char-count').textContent = `${data.count} characters!`
-    })
-    .catch(err => console.log(err))
-}
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div>
-        <label htmlFor='char-input'>How many characters does </label>
-        <input id='char-input' type='text' placeholder="my string"/><span> </span>
-        <button onClick={handleSubmit}>have?</button>
-        <div>
-          <h3 id='char-count' data-testid="char-count"> </h3>
-        </div>
-      </div>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lapaks: data,
+      activeLapak: data[0],
+      filterIsVisible: false,
+      filterCity: 'any',
+      filteredLapaks: [],
+      isFiltering: false
+    };
+
+    this.setActiveLapak = this.setActiveLapak.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
+    this.clearFilter = this.clearFilter.bind(this);
+    this.filterLapaks = this.filterLapaks.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
+  }
+
+  componentDidMount() {
+    fetch("/lapak_list")
+      .then((res) => res.json())
+      .then((restext) => this.setState({ lapaks: restext, activeLapak: restext[0] }))
+  }
+
+  handleFilterChange(e) {
+    const target = e.target;
+    const { value, name } = target;
+    console.log(`${value} ${name}`)
+    this.setState({
+      [name]: value,
+    }, function() {
+      this.filterLapaks();
+    });
+  }
+
+  filterLapaks() {
+    const { lapaks, filterCity } = this.state;
+    const isFiltering = filterCity !== 'any';
+
+    const getFilteredLapaks = (lapaks) => {
+      const filteredLapaks = [];
+
+      lapaks.forEach(lapak => {
+        const { city } = lapak;
+
+        const match = (city === parseInt(filterCity));
+
+        match && filteredLapaks.push(lapak);
+      });
+
+      return filteredLapaks;
+    };
+
+    this.setState({
+      filteredLapaks: getFilteredLapaks(lapaks),
+      activeLapak: getFilteredLapaks(lapaks)[0] || lapaks[0],
+      isFiltering,
+    });
+  }
+
+  toggleFilter(e) {
+    e.preventDefault();
+    this.setState({
+      filterIsVisible: !this.state.filterIsVisible,
+    });
+  }
+
+  clearFilter(e, form) {
+    e.preventDefault();
+    this.setState({
+      lapaks: this.state.properties.sort((a, b) => a.index - b.index),
+      filterCity: 'any',
+      filteredProperties: [],
+      isFiltering: false,
+      activeLapak: this.state.lapaks[0],
+    });
+    form.reset();
+  }
+
+  // setActiveLapak(lapak, scroll) {
+  //   this.setState({
+  //     activeLapak: lapak,
+  //   });
+
+  //   const { index } = lapak;
+
+  //   // Scroll to active property
+  //   if (scroll) {
+  //     const target = `#card-${index}`;
+  //     jump(target, {
+  //       duration: 800,
+  //       easing: easeInOutCubic,
+  //     });
+  //   }
+  // }
+
+
+  render() {
+    const {
+      lapaks,
+      activeLapak,
+      filterIsVisible,
+      filteredLapaks,
+      isFiltering
+    } = this.state;
+    const lapakList = isFiltering ? filteredLapaks : lapaks;
+
+    return (
+      <Container>
+        <Row>
+          <Col md={5}>
+            <Header
+              filterIsVisible={filterIsVisible}
+              toggleFilter={this.toggleFilter}
+              handleFilterChange={this.handleFilterChange}
+              clearFilter={this.clearFilter}
+              />
+
+            <div className="cards container">
+              {/* <div className={`cards-list row ${lapakList.length === 0 ? 'is-empty' : ''}`}> */}
+                {
+                  lapakList.map(lapak => <Card
+                    key={lapak._id}
+                    lapak={lapak}
+                    activeLapak={activeLapak}
+                    setActiveLapak={this.setActiveLapak}
+                  />)
+                }
+                {/* {
+                  (isFiltering && lapakList.length === 0) && <p className="warning"><img src={picture} alt="" /><br />No properties were found</p>
+                } */}
+              {/* </div> */}
+            </div>
+          </Col>
+          <Col md={7}>
+            this section is for Google Maps
+          </Col>
+        </Row>
+      </Container>
+
+
+    );
+  }
 }
 
 export default App;
