@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { Container, Col, Row } from 'bootstrap';
+import { Container, Col, Row } from 'react-bootstrap';
 import './App.css';
 
 import data from './data/InitData.json';
 import Header from './components/Header';
 import Card from './components/Card';
 
-// import jump from 'jump.js';
-// import { easeInOutCubic } from './utils/Easing';
+import jump from 'jump.js';
+import { easeInOutCubic } from './utils/Easing';
 
+console.log('====================================');
+console.log(data);
+console.log('====================================');
 
 class App extends Component {
   constructor(props) {
@@ -41,7 +44,7 @@ class App extends Component {
     console.log(`${value} ${name}`)
     this.setState({
       [name]: value,
-    }, function() {
+    }, function () {
       this.filterLapaks();
     });
   }
@@ -90,22 +93,22 @@ class App extends Component {
     form.reset();
   }
 
-  // setActiveLapak(lapak, scroll) {
-  //   this.setState({
-  //     activeLapak: lapak,
-  //   });
+  setActiveLapak(lapak, scroll) {
+    this.setState({
+      activeLapak: lapak,
+    });
 
-  //   const { index } = lapak;
+    const { index } = lapak;
 
-  //   // Scroll to active property
-  //   if (scroll) {
-  //     const target = `#card-${index}`;
-  //     jump(target, {
-  //       duration: 800,
-  //       easing: easeInOutCubic,
-  //     });
-  //   }
-  // }
+    // Scroll to active property
+    if (scroll) {
+      const target = `#card-${index}`;
+      jump(target, {
+        duration: 800,
+        easing: easeInOutCubic,
+      });
+    }
+  }
 
 
   render() {
@@ -127,19 +130,19 @@ class App extends Component {
               toggleFilter={this.toggleFilter}
               handleFilterChange={this.handleFilterChange}
               clearFilter={this.clearFilter}
-              />
+            />
 
             <div className="cards container">
               {/* <div className={`cards-list row ${lapakList.length === 0 ? 'is-empty' : ''}`}> */}
-                {
-                  lapakList.map(lapak => <Card
-                    key={lapak._id}
-                    lapak={lapak}
-                    activeLapak={activeLapak}
-                    setActiveLapak={this.setActiveLapak}
-                  />)
-                }
-                {/* {
+              {
+                lapakList.map(lapak => <Card
+                  key={lapak._id}
+                  lapak={lapak}
+                  activeLapak={activeLapak}
+                  setActiveLapak={this.setActiveLapak}
+                />)
+              }
+              {/* {
                   (isFiltering && lapakList.length === 0) && <p className="warning"><img src={picture} alt="" /><br />No properties were found</p>
                 } */}
               {/* </div> */}
@@ -150,9 +153,7 @@ class App extends Component {
           </Col>
         </Row>
       </Container>
-
-
-    );
+    )
   }
 }
 

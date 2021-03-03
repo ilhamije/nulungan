@@ -1,15 +1,24 @@
 # Use an official node runtime as a parent image
 FROM node:latest
 
-WORKDIR /home/node/app/
+RUN mkdir -p /app/node_modules && chown -R node:node /app
+
+WORKDIR /app
 
 # Install dependencies
-COPY package.json /home/node/app/
+COPY package*.json /app/
 
-RUN npm install --legacy-peer-deps --unsafe-perm=true --allow-root
+# RUN npm install --legacy-peer-deps
+RUN npm install --unsafe-perm
+
+USER node
 
 # Add rest of the client code
-COPY . /home/node/app/
+COPY --chown=node:node . /app/
+
+RUN chmod a+x /app/node_modules/.bin/react-scripts
+
+RUN mkdir -p /app/node_modules/.cache
 
 EXPOSE 3000
 
