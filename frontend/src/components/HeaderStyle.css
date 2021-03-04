@@ -1,0 +1,15 @@
+.h1-title {
+    font-family: 'Patua One', cursive;
+}
+
+.header-filter {
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 100; /* this is optional and should be different for every project */
+}

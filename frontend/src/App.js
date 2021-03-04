@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
-import './App.css';
+// import './App.css';
 
-import data from './data/InitData.json';
+import data from './data/LapakPoint.json';
 import Header from './components/Header';
 import Card from './components/Card';
 
 import jump from 'jump.js';
 import { easeInOutCubic } from './utils/Easing';
 
-console.log('====================================');
-console.log(data);
-console.log('====================================');
 
 class App extends Component {
   constructor(props) {
@@ -19,14 +16,14 @@ class App extends Component {
     this.state = {
       lapaks: data,
       activeLapak: data[0],
-      filterIsVisible: false,
+      // filterIsVisible: false,
       filterCity: 'any',
       filteredLapaks: [],
       isFiltering: false
     };
 
     this.setActiveLapak = this.setActiveLapak.bind(this);
-    this.toggleFilter = this.toggleFilter.bind(this);
+    // this.toggleFilter = this.toggleFilter.bind(this);
     this.clearFilter = this.clearFilter.bind(this);
     this.filterLapaks = this.filterLapaks.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
@@ -59,7 +56,8 @@ class App extends Component {
       lapaks.forEach(lapak => {
         const { city } = lapak;
 
-        const match = (city === parseInt(filterCity));
+        const match =
+          (city.toLowerCase().includes(filterCity.toLowerCase()) || filterCity === 'any');
 
         match && filteredLapaks.push(lapak);
       });
@@ -74,20 +72,20 @@ class App extends Component {
     });
   }
 
-  toggleFilter(e) {
-    e.preventDefault();
-    this.setState({
-      filterIsVisible: !this.state.filterIsVisible,
-    });
-  }
+  // toggleFilter(e) {
+  //   e.preventDefault();
+  //   this.setState({
+  //     filterIsVisible: !this.state.filterIsVisible,
+  //   });
+  // }
 
   clearFilter(e, form) {
     e.preventDefault();
     this.setState({
-      lapaks: this.state.properties.sort((a, b) => a.index - b.index),
+      lapaks: this.state.lapaks.sort((a, b) => a.index - b.index),
       filterCity: 'any',
-      filteredProperties: [],
-      isFiltering: false,
+      // filteredProperties: [],
+      // isFiltering: false,
       activeLapak: this.state.lapaks[0],
     });
     form.reset();
@@ -115,9 +113,9 @@ class App extends Component {
     const {
       lapaks,
       activeLapak,
-      filterIsVisible,
+      // filterIsVisible,
       filteredLapaks,
-      isFiltering
+      isFiltering,
     } = this.state;
     const lapakList = isFiltering ? filteredLapaks : lapaks;
 
@@ -126,14 +124,14 @@ class App extends Component {
         <Row>
           <Col md={5}>
             <Header
-              filterIsVisible={filterIsVisible}
-              toggleFilter={this.toggleFilter}
+              // filterIsVisible={filterIsVisible}
+              // toggleFilter={this.toggleFilter}
               handleFilterChange={this.handleFilterChange}
               clearFilter={this.clearFilter}
             />
 
             <div className="cards container">
-              {/* <div className={`cards-list row ${lapakList.length === 0 ? 'is-empty' : ''}`}> */}
+              <div>
               {
                 lapakList.map(lapak => <Card
                   key={lapak._id}
@@ -142,10 +140,10 @@ class App extends Component {
                   setActiveLapak={this.setActiveLapak}
                 />)
               }
-              {/* {
-                  (isFiltering && lapakList.length === 0) && <p className="warning"><img src={picture} alt="" /><br />No properties were found</p>
-                } */}
-              {/* </div> */}
+              {
+                (isFiltering && lapakList.length === 0) && <p className="warning">No properties were found</p>
+              }
+              </div>
             </div>
           </Col>
           <Col md={7}>

@@ -6,34 +6,24 @@ import { Col, Button, Form, Container } from 'react-bootstrap';
 
 class Filter extends Component {
     render() {
-        const { toggleFilter, handleFilterChange, clearFilter } = this.props;
+        const { handleFilterChange } = this.props;
         return (
-            <Container>
+            <>
                 <Form ref={input => this.form = input} className="filter">
                     <Form.Row>
-                        <Form.Group as={Col} >
-
-                            <Form.Label htmlFor="filterCity">City</Form.Label>
-
-                            <Form.Control as="select" value={handleFilterChange.value}
-                                id="filterCity" name="filterCity" onChange={e => handleFilterChange(e)}>
-                                <option value="any">Any</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                        <Form.Group as={Col} md={8}>
+                            <Form.Control type="text"
+                                id="filterCity"
+                                name="filterCity"
+                                value={handleFilterChange.value}
+                                onChange={e => handleFilterChange(e)}
+                                placeholder="Cari kota..">
                             </Form.Control>
 
                         </Form.Group>
-
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Group inline="true" >
-                            <Button variant="outline-success" onClick={e => clearFilter(e, this.form)}>Clear</Button>
-                            <Button variant="outline-success" onClick={ e => toggleFilter(e) }><span>Close</span></Button>
-                        </Form.Group>
                     </Form.Row>
                 </Form>
-            </Container>
+            </>
         );
     }
 }
