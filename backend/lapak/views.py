@@ -25,12 +25,12 @@ def lapak_list(request):
 
 
 @csrf_exempt
-def lapak_detail(request, pk):
+def lapak_detail(request, id):
     """
     Retrieve, update or delete a code lapak.
     """
     try:
-        lapak = LapakModel.objects.get(pk=pk)
+        lapak = LapakModel.objects.get(id=id)
     except LapakModel.DoesNotExist:
         return JsonResponse({"msg": "The droid is not found, bro."}, status=404)
 
@@ -48,4 +48,4 @@ def lapak_detail(request, pk):
 
     elif request.method == 'DELETE':
         lapak.delete()
-        return HttpResponse(status=204)
+        return JsonResponse({"msg": "Lapak is deleted, bro."}, status=204)

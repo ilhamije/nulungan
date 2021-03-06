@@ -4,8 +4,9 @@ from lapak.models import LapakModel
 
 class LapakSerializer(serializers.ModelSerializer):
     class Meta:
-        models = LapakModel
+        model = LapakModel
         fields = [
+            'id',
             'lapak_name',
             'lapak_type',
             'image_url',
@@ -15,5 +16,6 @@ class LapakSerializer(serializers.ModelSerializer):
             'longitude',
             'active',
             'valid',
-            'socmed_link'
+            'socmed_link',
+            'created'
         ]
