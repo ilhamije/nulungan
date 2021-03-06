@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { priceFormat } from './utils/Formatters.js';
-import { Col, Button, Form, Container } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 
 
 class Filter extends Component {

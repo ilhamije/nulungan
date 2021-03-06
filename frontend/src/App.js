@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("/lapak_list")
+    fetch("/lapaks")
       .then((res) => res.json())
       .then((restext) => this.setState({ lapaks: restext, activeLapak: restext[0] }))
   }

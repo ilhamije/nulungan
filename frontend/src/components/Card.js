@@ -29,7 +29,7 @@ const MyCard = ({ lapak, activeLapak, setActiveLapak }) => {
                 <div class="col-md-4 center">
                     <Card.Body>
                         <Card.Text>
-                            {index + 1}<br />
+                            {/* {index + 1}<br /> */}
                             {address}<br />
                             {city}<br />
                         </Card.Text>
