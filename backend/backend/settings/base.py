@@ -27,7 +27,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'contrib.apps.ContribConfig',
+    'lapak',
+    'rest_framework',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'need_done.lib.authentication.CsrfExemptSessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
