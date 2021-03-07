@@ -18,6 +18,8 @@ class App extends Component {
       lapaks: data,
       activeLapak: data[0],
       // filterIsVisible: false,
+      filterLapakType: 'any',
+      filterAddress: 'any',
       filterCity: 'any',
       filteredLapaks: [],
       isFiltering: false
@@ -48,17 +50,21 @@ class App extends Component {
   }
 
   filterLapaks() {
-    const { lapaks, filterCity } = this.state;
-    const isFiltering = filterCity !== 'any';
+    const { lapaks, filterLapakType, filterAddress, filterCity } = this.state;
+    const isFiltering = filterCity !== 'any' ||
+      filterLapakType !== 'any' ||
+      filterAddress !== 'any';
 
     const getFilteredLapaks = (lapaks) => {
       const filteredLapaks = [];
 
       lapaks.forEach(lapak => {
-        const { city } = lapak;
+        const { lapak_type, address, city } = lapak;
 
         const match =
-          (city.toLowerCase().includes(filterCity.toLowerCase()) || filterCity === 'any');
+        (lapak_type.toLowerCase().includes(filterLapakType.toLowerCase()) || filterLapakType === 'any') &&
+        (address.toLowerCase().includes(filterAddress.toLowerCase()) || filterAddress === 'any') &&
+        (city.toLowerCase().includes(filterCity.toLowerCase()) || filterCity === 'any');
 
         match && filteredLapaks.push(lapak);
       });

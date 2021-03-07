@@ -16,7 +16,7 @@ class Filter extends Component {
                                 name="filterCity"
                                 value={handleFilterChange.value}
                                 onChange={e => handleFilterChange(e)}
-                                placeholder="Cari kota..">
+                                placeholder="Cari sini, kak..">
                             </Form.Control>
 
                         </Form.Group>
