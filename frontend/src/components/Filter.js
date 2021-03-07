@@ -28,8 +28,8 @@ class Filter extends Component {
 }
 
 Filter.propTypes = {
-    toggleFilter: PropTypes.func.isRequired,
-    clearFilter: PropTypes.func.isRequired,
+    // toggleFilter: PropTypes.func.isRequired,
+    // clearFilter: PropTypes.func.isRequired,
     handleFilterChange: PropTypes.func.isRequired,
 };
 

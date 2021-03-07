@@ -30,10 +30,11 @@ class App extends Component {
     this.clearFilter = this.clearFilter.bind(this);
     this.filterLapaks = this.filterLapaks.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
+    // this.handleLapakFormSubmit = this.handleLapakFormSubmit.bind(this);
   }
 
   componentDidMount() {
-    fetch("/lapaks")
+    fetch('/lapaks')
       .then((res) => res.json())
       .then((restext) => this.setState({ lapaks: restext, activeLapak: restext[0] }))
   }
@@ -48,6 +49,18 @@ class App extends Component {
       this.filterLapaks();
     });
   }
+
+  // handleLapakFormSubmit(e) {
+  //   // const target = e.target;
+  //   // const { value, name } = target;
+  //   // console.log(`${value} ${name}`)
+  //   console.log('ehehehehey')
+  //   // this.setState({
+  //   //   [name]: value,
+  //   // }, function () {
+  //   //   this.filterLapaks();
+  //   // });
+  // }
 
   filterLapaks() {
     const { lapaks, filterLapakType, filterAddress, filterCity } = this.state;
@@ -135,17 +148,15 @@ class App extends Component {
               // toggleFilter={this.toggleFilter}
               handleFilterChange={this.handleFilterChange}
               clearFilter={this.clearFilter}
-            />
+              />
 
-            <LapakForm
-
-            />
+            <LapakForm />
 
             {/* <div className="cards container"> */}
               <div>
               {
                 lapakList.map(lapak => <Card
-                  key={lapak._id}
+                  key={lapak.id}
                   lapak={lapak}
                   activeLapak={activeLapak}
                   setActiveLapak={this.setActiveLapak}

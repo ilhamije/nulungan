@@ -1,6 +1,6 @@
 [
     {
-        "_id": "593e9297e17df20c4a237d42",
+        "id": "593e9297e17df20c4a237d42",
         "index": 0,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -14,7 +14,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e9297ec4cca9c56bf61af",
+        "id": "593e9297ec4cca9c56bf61af",
         "index": 1,
         "lapak_name": "Eko",
         "lapak_type": "Kerupuk",
@@ -28,7 +28,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e929773c71925e5d7c11c",
+        "id": "593e929773c71925e5d7c11c",
         "index": 2,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -42,7 +42,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e92973d4d15eedb129aee",
+        "id": "593e92973d4d15eedb129aee",
         "index": 3,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -56,7 +56,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e929728b7f8543b7907e1",
+        "id": "593e929728b7f8543b7907e1",
         "index": 4,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -70,7 +70,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e92975996a6263d146444",
+        "id": "593e92975996a6263d146444",
         "index": 5,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -84,7 +84,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e9297a13e246da5ba0884",
+        "id": "593e9297a13e246da5ba0884",
         "index": 6,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -98,7 +98,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e9297afa51a013fcd07d5",
+        "id": "593e9297afa51a013fcd07d5",
         "index": 7,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -112,7 +112,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e92972bd8fd05f2ab1a89",
+        "id": "593e92972bd8fd05f2ab1a89",
         "index": 8,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -126,7 +126,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e9297fe2e6d32c859ecf4",
+        "id": "593e9297fe2e6d32c859ecf4",
         "index": 9,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -140,7 +140,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e92970481ccf52f948e6d",
+        "id": "593e92970481ccf52f948e6d",
         "index": 10,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -154,7 +154,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e9297e09417746b79e1c5",
+        "id": "593e9297e09417746b79e1c5",
         "index": 11,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -168,7 +168,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e92978e7160fa2b9992d9",
+        "id": "593e92978e7160fa2b9992d9",
         "index": 12,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -182,7 +182,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e92973459fbdfa1f1c041",
+        "id": "593e92973459fbdfa1f1c041",
         "index": 13,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -196,7 +196,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e92970306538830483e14",
+        "id": "593e92970306538830483e14",
         "index": 14,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -210,7 +210,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e92976042982766c97ca1",
+        "id": "593e92976042982766c97ca1",
         "index": 15,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -224,7 +224,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e92971901e888a036a258",
+        "id": "593e92971901e888a036a258",
         "index": 16,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -238,7 +238,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e929780e6af9c11a10b90",
+        "id": "593e929780e6af9c11a10b90",
         "index": 17,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -252,7 +252,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e9297441033e3f818ff6b",
+        "id": "593e9297441033e3f818ff6b",
         "index": 18,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -266,7 +266,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e9297964d25b59d94e8aa",
+        "id": "593e9297964d25b59d94e8aa",
         "index": 19,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -280,7 +280,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e929737636c879539416d",
+        "id": "593e929737636c879539416d",
         "index": 20,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -294,7 +294,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e9297b2516c3e5af4601f",
+        "id": "593e9297b2516c3e5af4601f",
         "index": 21,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -308,7 +308,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e92972f6034590df04c45",
+        "id": "593e92972f6034590df04c45",
         "index": 22,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -322,7 +322,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e9297aa0e233a421f1a58",
+        "id": "593e9297aa0e233a421f1a58",
         "index": 23,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -336,7 +336,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e92977526a30b580dcfb2",
+        "id": "593e92977526a30b580dcfb2",
         "index": 24,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -350,7 +350,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e92975141c74b24375bd9",
+        "id": "593e92975141c74b24375bd9",
         "index": 25,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -364,7 +364,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e9297b3ffeb95bb008453",
+        "id": "593e9297b3ffeb95bb008453",
         "index": 26,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -378,7 +378,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e9297e262c91acd91ab81",
+        "id": "593e9297e262c91acd91ab81",
         "index": 27,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -392,7 +392,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e9297df21e62e0465f91f",
+        "id": "593e9297df21e62e0465f91f",
         "index": 28,
         "lapak_name": "fulan",
         "lapak_type": "bakso",
@@ -406,7 +406,7 @@
         "socmed_link": ""
     },
     {
-        "_id": "593e929787f567dccda86910",
+        "id": "593e929787f567dccda86910",
         "index": 29,
         "lapak_name": "fulan",
         "lapak_type": "bakso",

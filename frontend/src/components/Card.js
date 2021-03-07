@@ -46,7 +46,7 @@ const MyCard = ({ lapak, activeLapak, setActiveLapak }) => {
 MyCard.propTypes = {
     lapak: PropTypes.object.isRequired,
     activeLapak: PropTypes.object.isRequired,
-    setActiveProperty: PropTypes.func.isRequired,
+    // setActiveProperty: PropTypes.func.isRequired,
 };
 
 export default MyCard;
