@@ -1,14 +1,15 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 // import PropTypes from 'prop-types';
 import Filter from './Filter';
-import { Row, Container, Col } from 'react-bootstrap';
 
 import './HeaderStyle.css'
 
 
 function Header({ handleFilterChange, clearFilter }) {
     return (
-        <Container style={{ marginBottom: "30px", marginTop: "50px" }}>
+        <Container fluid
+            style={{ marginBottom: "30px", marginTop: "50px" }}>
             <Row>
                 <Col>
                     <div>
@@ -22,6 +23,7 @@ function Header({ handleFilterChange, clearFilter }) {
                     </div>
                 </Col>
             </Row>
+            <hr />
         </Container>
     );
 }

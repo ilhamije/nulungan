@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { priceFormat } from './utils/Formatters.js';
 import { Col, Form } from 'react-bootstrap';
 
 

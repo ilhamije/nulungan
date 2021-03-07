@@ -5,6 +5,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 import data from './data/LapakPoint.json';
 import Header from './components/Header';
 import Card from './components/Card';
+import LapakForm from './components/Form';
 
 import jump from 'jump.js';
 import { easeInOutCubic } from './utils/Easing';
@@ -120,9 +121,9 @@ class App extends Component {
     const lapakList = isFiltering ? filteredLapaks : lapaks;
 
     return (
-      <Container>
+      <Container fluid>
         <Row>
-          <Col md={5}>
+          <Col md={3}>
             <Header
               // filterIsVisible={filterIsVisible}
               // toggleFilter={this.toggleFilter}
@@ -130,7 +131,11 @@ class App extends Component {
               clearFilter={this.clearFilter}
             />
 
-            <div className="cards container">
+            <LapakForm
+
+            />
+
+            {/* <div className="cards container"> */}
               <div>
               {
                 lapakList.map(lapak => <Card
@@ -144,9 +149,9 @@ class App extends Component {
                 (isFiltering && lapakList.length === 0) && <p className="warning">No properties were found</p>
               }
               </div>
-            </div>
+            {/* </div> */}
           </Col>
-          <Col md={7}>
+          <Col md={9}>
             this section is for Google Maps
           </Col>
         </Row>
