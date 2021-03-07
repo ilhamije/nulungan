@@ -5,7 +5,7 @@ from contrib.views import char_count
 
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("kiper/", admin.site.urls),
     path("char_count", char_count, name="char_count"),
     path('', include('lapak.urls')),
 ]

@@ -44,13 +44,7 @@ class LapakForm extends Component {
         });
 
         event.preventDefault();
-        this.setState({
-            lapak_name: '',
-            lapak_type: '',
-            address: '',
-            city: '',
-            sosmed_link: ''
-        });
+        this.formRef.reset();
     }
 
 
@@ -62,6 +56,7 @@ class LapakForm extends Component {
                 {/* <Form ref={input => this.form = input} className="LapakForm"> */}
                 {/* <Form className="LapakForm" onSubmit={handleLapakFormSubmit}> */}
                 <Form
+                    ref={(ref) => this.formRef = ref}
                     className="LapakForm"
                     onSubmit={this.handleSubmit}>
                     <Form.Row>

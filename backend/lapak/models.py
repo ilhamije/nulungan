@@ -19,5 +19,8 @@ class LapakModel(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering=['created']
+        ordering=['-created']
 
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.lapak_name
