@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Container, Col, Form, Button } from 'react-bootstrap';
-// import axios from 'axios';
 
 
 class LapakForm extends Component {
@@ -50,7 +49,7 @@ class LapakForm extends Component {
 
     render() {
         // const { handleLapakFormSubmit } = this.props;
-        // const { handleSubmit } = this.props;
+        const { toggleLapakForm } = this.props;
         return (
             <Container>
                 {/* <Form ref={input => this.form = input} className="LapakForm"> */}
@@ -108,9 +107,13 @@ class LapakForm extends Component {
                             </Form.Group>
 
 
+                            <Form.Group>
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>
+                            <Button variant="outline-success"
+                                    onClick={e => toggleLapakForm(e) }><span>Close</span></Button>
+                            </Form.Group>
 
                         </Form.Group>
                     </Form.Row>
@@ -121,9 +124,9 @@ class LapakForm extends Component {
 }
 
 LapakForm.propTypes = {
-    // toggleLapakForm: PropTypes.func.isRequired,
     // clearLapakForm: PropTypes.func.isRequired,
     // handleLapakFormSubmit: PropTypes.func.isRequired,
+    toggleLapakForm: PropTypes.func.isRequired,
 };
 
 export default LapakForm;

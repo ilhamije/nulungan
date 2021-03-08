@@ -5,7 +5,6 @@ import { Container, Col, Row } from 'react-bootstrap';
 import data from './data/LapakPoint.json';
 import Header from './components/Header';
 import Card from './components/Card';
-import LapakForm from './components/Form';
 
 import jump from 'jump.js';
 import { easeInOutCubic } from './utils/Easing';
@@ -18,6 +17,7 @@ class App extends Component {
       lapaks: data,
       activeLapak: data[0],
       // filterIsVisible: false,
+      lapakFormIsVisible: false,
       filterLapakType: 'any',
       filterAddress: 'any',
       filterCity: 'any',
@@ -27,6 +27,7 @@ class App extends Component {
 
     this.setActiveLapak = this.setActiveLapak.bind(this);
     // this.toggleFilter = this.toggleFilter.bind(this);
+    this.toggleLapakForm = this.toggleLapakForm.bind(this);
     this.clearFilter = this.clearFilter.bind(this);
     this.filterLapaks = this.filterLapaks.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
@@ -99,6 +100,13 @@ class App extends Component {
   //   });
   // }
 
+  toggleLapakForm(e) {
+    e.preventDefault();
+    this.setState({
+      lapakFormIsVisible: !this.state.lapakFormIsVisible,
+    });
+  }
+
   clearFilter(e, form) {
     e.preventDefault();
     this.setState({
@@ -136,6 +144,7 @@ class App extends Component {
       // filterIsVisible,
       filteredLapaks,
       isFiltering,
+      lapakFormIsVisible,
     } = this.state;
     const lapakList = isFiltering ? filteredLapaks : lapaks;
 
@@ -148,9 +157,9 @@ class App extends Component {
               // toggleFilter={this.toggleFilter}
               handleFilterChange={this.handleFilterChange}
               clearFilter={this.clearFilter}
+              lapakFormIsVisible={lapakFormIsVisible}
+              toggleLapakForm={this.toggleLapakForm}
               />
-
-            <LapakForm />
 
             {/* <div className="cards container"> */}
               <div>
