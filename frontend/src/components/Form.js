@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Redirect } from 'react-router'
+// import PropTypes from 'prop-types';
 import { Container, Col, Form, Button } from 'react-bootstrap';
-
-import MyNav from './Nav';
 
 
 class LapakForm extends Component {
@@ -13,13 +12,13 @@ class LapakForm extends Component {
             lapak_type: '',
             address: '',
             city: '',
-            sosmed_link: ''
+            sosmed_link: '',
+            fireRedirect: false
         };
     }
 
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
-        // console.log('hey change', event.target.name)
     }
 
     handleSubmit = (event) => {
@@ -45,24 +44,22 @@ class LapakForm extends Component {
         });
 
         event.preventDefault();
+        this.setState({ fireRedirect: true })
         this.formRef.reset();
     }
 
 
     render() {
-        // const { handleLapakFormSubmit } = this.props;
-        const { toggleLapakForm } = this.props;
+        const { from } = this.props.location || '/'
+        const { fireRedirect } = this.state
         return (
             <Container>
-                {/* <Form ref={input => this.form = input} className="LapakForm"> */}
-                {/* <Form className="LapakForm" onSubmit={handleLapakFormSubmit}> */}
-                <MyNav />
                 <Form
                     ref={(ref) => this.formRef = ref}
                     className="LapakForm"
                     onSubmit={this.handleSubmit}>
                     <Form.Row>
-                        <Form.Group as={Col} md={8}>
+                        <Form.Group as={Col} md={{span:8, offset: 2}}>
                             <Form.Group>
                                 <Form.Label>Nama</Form.Label>
                                 <Form.Control type="text"
@@ -119,6 +116,10 @@ class LapakForm extends Component {
                         </Form.Group>
                     </Form.Row>
                 </Form>
+                {fireRedirect && (
+                    <Redirect to={from || '/'} />
+                )}
+
             </Container>
         );
     }
@@ -127,7 +128,7 @@ class LapakForm extends Component {
 LapakForm.propTypes = {
     // clearLapakForm: PropTypes.func.isRequired,
     // handleLapakFormSubmit: PropTypes.func.isRequired,
-    toggleLapakForm: PropTypes.func.isRequired,
+    // toggleLapakForm: PropTypes.func.isRequired,
 };
 
 export default LapakForm;
