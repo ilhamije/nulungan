@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Route, Switch } from 'react-router-dom';
+import { Container, Col, Row, Button } from 'react-bootstrap';
 // import './App.css';
 
 import data from './data/LapakPoint.json';
 import Header from './components/Header';
 import Card from './components/Card';
+import LapakForm from './components/Form';
+import MyNav from './components/Nav';
 
 import jump from 'jump.js';
 import { easeInOutCubic } from './utils/Easing';
@@ -150,6 +153,10 @@ class App extends Component {
 
     return (
       <Container fluid>
+        <Switch>
+          <Route path="/addlapak" component={LapakForm} />
+        </Switch>
+        <MyNav />
         <Row>
           <Col md={3}>
             <Header
@@ -157,10 +164,17 @@ class App extends Component {
               // toggleFilter={this.toggleFilter}
               handleFilterChange={this.handleFilterChange}
               clearFilter={this.clearFilter}
-              lapakFormIsVisible={lapakFormIsVisible}
-              toggleLapakForm={this.toggleLapakForm}
               />
 
+            <div className={`${lapakFormIsVisible ? 'invisible' : ''}`}>
+              <LapakForm
+                toggleLapakForm={this.toggleLapakForm}
+                lapakFormIsVisible={lapakFormIsVisible} />
+            </div>
+            <Button
+              size="sm"
+              variant="outline-primary"
+              onClick={this.toggleLapakForm}>Add Data</Button>
             {/* <div className="cards container"> */}
               <div>
               {

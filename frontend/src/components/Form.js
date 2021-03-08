@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Col, Form, Button } from 'react-bootstrap';
 
+import MyNav from './Nav';
+
 
 class LapakForm extends Component {
     constructor(props) {
@@ -54,6 +56,7 @@ class LapakForm extends Component {
             <Container>
                 {/* <Form ref={input => this.form = input} className="LapakForm"> */}
                 {/* <Form className="LapakForm" onSubmit={handleLapakFormSubmit}> */}
+                <MyNav />
                 <Form
                     ref={(ref) => this.formRef = ref}
                     className="LapakForm"
@@ -108,11 +111,9 @@ class LapakForm extends Component {
 
 
                             <Form.Group>
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
-                            <Button variant="outline-success"
-                                    onClick={e => toggleLapakForm(e) }><span>Close</span></Button>
+                                <Button variant="primary" type="submit">
+                                    Submit
+                                </Button>
                             </Form.Group>
 
                         </Form.Group>

@@ -16,12 +16,16 @@ function Header({ lapakFormIsVisible, toggleLapakForm, handleFilterChange, clear
                     <div>
                         <small>Nulugan.ORG</small>
                         <h1 className="h1-title">Bantu beli dagangan mereka, yuk! </h1>
-                        <Button variant="outline-primary" onClick={e => toggleLapakForm(e) }>Add Data</Button>
                     </div>
                     <div>
                         <Filter
                             handleFilterChange={handleFilterChange}
                             clearFilter={clearFilter} />
+
+                        <Button
+                            class="btn-sm"
+                            variant="outline-primary"
+                            onClick={e => toggleLapakForm(e) }>Add Data</Button>
                     </div>
                     <div className={`${lapakFormIsVisible ? 'invisible' : ''}`}>
                         <LapakForm
