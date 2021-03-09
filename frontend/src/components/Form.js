@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router'
 // import PropTypes from 'prop-types';
-import { Container, Col, Form, Button } from 'react-bootstrap';
+import { Container, Col, Form, Button, Alert } from 'react-bootstrap';
 
 
 class LapakForm extends Component {
@@ -13,7 +13,9 @@ class LapakForm extends Component {
             address: '',
             city: '',
             sosmed_link: '',
-            fireRedirect: false
+            fireRedirect: false,
+            showMessage: false,
+            msgStatus: false
         };
     }
 
@@ -38,20 +40,26 @@ class LapakForm extends Component {
             console.log('is it working?')
             console.log(response)
             return response.json();
-        }).catch(function (error) {
+        })
+        .then(() => {
+            this.setState({ msgStatus: true });
+            window.setTimeout(
+                () => this.setState({ fireRedirect: true }), 3000);
+        })
+        .catch(function (error) {
             console.log('is it NOT working?')
             console.log(error);
         });
 
+        this.setState({ showMessage: true });
         event.preventDefault();
-        this.setState({ fireRedirect: true })
         this.formRef.reset();
     }
 
 
     render() {
         const { from } = this.props.location || '/'
-        const { fireRedirect } = this.state
+        const { showMessage, fireRedirect } = this.state
         return (
             <Container>
                 <Form
@@ -59,8 +67,11 @@ class LapakForm extends Component {
                     ref={(ref) => this.formRef = ref}
                     className="LapakForm"
                     onSubmit={this.handleSubmit}>
+
+
                     <Form.Row>
                         <Form.Group as={Col} md={{span:8, offset: 2}}>
+                            <h2 className="h1-title">Tambahkan Lapak</h2>
                             <Form.Group>
                                 <Form.Label>Nama</Form.Label>
                                 <Form.Control type="text"
@@ -110,16 +121,34 @@ class LapakForm extends Component {
 
                             <Form.Group>
                                 <Button variant="primary" type="submit">
-                                    Submit
+                                    Tambahkan
                                 </Button>
+                                <p>
+                                { showMessage &&
+                                <div>
+                                    {
+                                        this.state.msgStatus ?
+                                        <Alert variant="success">Data is added successfully.</Alert>
+                                        :
+                                        <Alert variant="warning"> Failed</Alert>
+                                    }
+                                </div>
+                                }
+                                </p>
                             </Form.Group>
 
                         </Form.Group>
                     </Form.Row>
                 </Form>
-                {fireRedirect && (
-                    <Redirect to={from || '/'} />
+
+                {this.state.msgStatus && fireRedirect && (
+                    <Redirect
+                        wait={5000}
+                        to={from || '/'} />
                 )}
+
+
+
 
             </Container>
         );
