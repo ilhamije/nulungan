@@ -8,7 +8,7 @@ import Filter from './Filter';
 function Header({ handleFilterChange, clearFilter }) {
     return (
         <Container fluid
-            style={{ marginBottom: "30px", marginTop: "50px" }}>
+            style={{ marginBottom: "10px", marginTop: "30px" }}>
             <Row>
                 <Col>
                     <div>

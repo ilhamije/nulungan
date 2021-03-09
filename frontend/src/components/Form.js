@@ -55,6 +55,7 @@ class LapakForm extends Component {
         return (
             <Container>
                 <Form
+                    style={{ marginBottom: "30px", marginTop: "50px" }}
                     ref={(ref) => this.formRef = ref}
                     className="LapakForm"
                     onSubmit={this.handleSubmit}>

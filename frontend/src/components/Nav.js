@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar, Button } from 'react-bootstrap';
+import logo from './../images/nulungan-inline-25.png'
 
 
 class SimpleNav extends Component {
     render() {
         return (
-            <Navbar variant="light" expand="lg">
-                <Navbar.Brand href="/">NulunganORG</Navbar.Brand>
+            <Navbar
+                style={{ marginLeft: "10px", marginTop: "5px", marginBottom: "-5px" }}>
+                <Navbar.Brand href="/">
+                    <img
+                        src={logo}
+                        height="90%"
+                        className="d-inline-block"
+                        alt="React Bootstrap logo"
+                    />
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse>
+                <Navbar.Collapse className="justify-content-end">
                     <Nav>
                         <Nav.Item>
-                            <Nav.Link href="/addlapak">Add</Nav.Link>
+                            <Nav.Link href="/addlapak">
+                                <Button size="sm" variant="dark">Add</Button>
+                            </Nav.Link>
                         </Nav.Item>
                     </Nav>
 
