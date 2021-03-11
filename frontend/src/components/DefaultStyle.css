@@ -7,3 +7,7 @@
  .my-default-style h1 {
      color: #8b008b;
  }
+
+ .invalid-msg {
+    color: #F07A7A;
+ }

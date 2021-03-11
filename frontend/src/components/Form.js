@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router'
 // import PropTypes from 'prop-types';
 import { Container, Col, Form, Button, Alert } from 'react-bootstrap';
+import SimpleReactValidator from 'simple-react-validator';
+
+import './DefaultStyle.css';
 
 
 class LapakForm extends Component {
@@ -17,6 +20,12 @@ class LapakForm extends Component {
             showMessage: false,
             msgStatus: false
         };
+        this.validator = new SimpleReactValidator({
+            messages: {
+              default: 'Bagian ini wajib.'
+            },
+            element: message => <div className="invalid-msg">{message}</div>
+        });
     }
 
     handleChange = (event) => {
@@ -26,6 +35,12 @@ class LapakForm extends Component {
     handleSubmit = (event) => {
         // alert('A form was submitted: ' + this.state);
         console.log('hey submit', this.state)
+        if (this.validator.allValid()) {
+            alert('you rocks!');
+        } else {
+            this.validator.showMessages();
+            this.forceUpdate();
+        }
 
         fetch('/lapaks/', {
             method: 'post',
@@ -72,6 +87,18 @@ class LapakForm extends Component {
                     <Form.Row>
                         <Form.Group as={Col} md={{span:8, offset: 2}}>
                             <h2 className="h1-title">Tambahkan Lapak</h2>
+                            <p>
+                                {showMessage &&
+                                    <div>
+                                        {
+                                            this.state.msgStatus ?
+                                                <Alert variant="success">Data is added successfully.</Alert>
+                                                :
+                                                <Alert variant="warning"> Failed</Alert>
+                                        }
+                                    </div>
+                                }
+                            </p>
                             <Form.Group>
                                 <Form.Label>Nama</Form.Label>
                                 <Form.Control type="text"
@@ -88,6 +115,7 @@ class LapakForm extends Component {
                                     value={this.state.value}
                                     onChange={this.handleChange}
                                     placeholder="ex: peyek, bakso, dll" />
+                                {this.validator.message('lapak_type', this.state.value, 'required')}
                             </Form.Group>
 
 
@@ -98,6 +126,7 @@ class LapakForm extends Component {
                                     value={this.state.value}
                                     onChange={this.handleChange}
                                     placeholder="Nama jalan juga boleh" />
+                                {this.validator.message('address', this.state.value, 'required')}
                             </Form.Group>
 
                             <Form.Group>
@@ -107,6 +136,7 @@ class LapakForm extends Component {
                                     value={this.state.value}
                                     onChange={this.handleChange}
                                     placeholder="Nama kota" />
+                                {this.validator.message('city', this.state.value, 'required')}
                             </Form.Group>
 
                             <Form.Group>
@@ -123,18 +153,6 @@ class LapakForm extends Component {
                                 <Button variant="primary" type="submit">
                                     Tambahkan
                                 </Button>
-                                <p>
-                                { showMessage &&
-                                <div>
-                                    {
-                                        this.state.msgStatus ?
-                                        <Alert variant="success">Data is added successfully.</Alert>
-                                        :
-                                        <Alert variant="warning"> Failed</Alert>
-                                    }
-                                </div>
-                                }
-                                </p>
                             </Form.Group>
 
                         </Form.Group>
