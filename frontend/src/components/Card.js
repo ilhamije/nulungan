@@ -25,7 +25,7 @@ const MyCard = ({ lapak, activeLapak, setActiveLapak }) => {
                     <Card.Header
                         className={`${lapak === activeLapak ? 'card-active-title' : ''}`}
                     >
-                            {lapak_name.toUpperCase()} | {lapak_type}
+                        {lapak_name.toUpperCase()}, {lapak_type}
                     </Card.Header>
                 </div>
                 {/* <div class="col-md-4 center"> */}

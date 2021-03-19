@@ -11,7 +11,7 @@ class LapakForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lapak_name: '',
+            lapak_name: '' || 'Fulan',
             lapak_type: '',
             address: '',
             city: '',
@@ -24,7 +24,7 @@ class LapakForm extends Component {
             messages: {
               default: 'Bagian ini wajib.'
             },
-            element: message => <div className="invalid-msg">{message}</div>
+            element: message => <div className="invalid-msg"><small>{message}</small></div>
         });
     }
 
@@ -35,11 +35,12 @@ class LapakForm extends Component {
     handleSubmit = (event) => {
         // alert('A form was submitted: ' + this.state);
         console.log('hey submit', this.state)
-        if (this.validator.allValid()) {
-            alert('you rocks!');
-        } else {
+
+
+        if (!this.validator.allValid()) {
             this.validator.showMessages();
             this.forceUpdate();
+            this.setState({ fireRedirect: false });
         }
 
         fetch('/lapaks/', {
@@ -52,8 +53,12 @@ class LapakForm extends Component {
             // We convert the React state to JSON and send it as the POST body
         })
         .then(function (response) {
-            console.log('is it working?')
-            console.log(response)
+            if (!response.ok) {
+                console.log('is it NOT working?');
+                this.setState({ msgStatus: false });
+            }
+            // console.log('is it working?')
+            // console.log(response)
             return response.json();
         })
         .then(() => {
@@ -62,7 +67,6 @@ class LapakForm extends Component {
                 () => this.setState({ fireRedirect: true }), 3000);
         })
         .catch(function (error) {
-            console.log('is it NOT working?')
             console.log(error);
         });
 
@@ -87,35 +91,25 @@ class LapakForm extends Component {
                     <Form.Row>
                         <Form.Group as={Col} md={{span:8, offset: 2}}>
                             <h2 className="h1-title">Tambahkan Lapak</h2>
-                            <p>
-                                {showMessage &&
-                                    <div>
-                                        {
-                                            this.state.msgStatus ?
-                                                <Alert variant="success">Data is added successfully.</Alert>
-                                                :
-                                                <Alert variant="warning"> Failed</Alert>
-                                        }
-                                    </div>
-                                }
-                            </p>
                             <Form.Group>
                                 <Form.Label>Nama</Form.Label>
                                 <Form.Control type="text"
                                     name="lapak_name"
-                                    value={this.state.value}
+                                    value={this.state.lapak_name}
                                     onChange={this.handleChange}
                                     placeholder="Nama si fulan (jika diketahui)" />
+                                <Form.Text muted>Ubah bagian ini jika kamu tau nama beliau.</Form.Text>
+                                {this.validator.message('lapak_name', this.state.lapak_name, 'alpha')}
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Jenis Dagangan</Form.Label>
+                                <Form.Label>Jenis Lapak</Form.Label>
                                 <Form.Control type="text"
                                     name="lapak_type"
-                                    value={this.state.value}
-                                    onChange={this.handleChange}
-                                    placeholder="ex: peyek, bakso, dll" />
-                                {this.validator.message('lapak_type', this.state.value, 'required')}
+                                    value={this.state.lapak_type}
+                                    onChange={this.handleChange} />
+                                <Form.Text muted>ex: peyek, bakso, dll</Form.Text>
+                                {this.validator.message('lapak_type', this.state.lapak_type, 'required|alpha')}
                             </Form.Group>
 
 
@@ -123,36 +117,48 @@ class LapakForm extends Component {
                                 <Form.Label>Alamat</Form.Label>
                                 <Form.Control type="text"
                                     name="address"
-                                    value={this.state.value}
+                                    value={this.state.address}
                                     onChange={this.handleChange}
-                                    placeholder="Nama jalan juga boleh" />
-                                {this.validator.message('address', this.state.value, 'required')}
+                                    />
+                                <Form.Text muted>Alamat / nama jalan atau kawasan kelurahan atau patokan</Form.Text>
+                                {this.validator.message('address', this.state.address, 'required|alpha')}
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label>Kota</Form.Label>
                                 <Form.Control type="text"
                                     name="city"
-                                    value={this.state.value}
-                                    onChange={this.handleChange}
-                                    placeholder="Nama kota" />
-                                {this.validator.message('city', this.state.value, 'required')}
+                                    value={this.state.city}
+                                    onChange={this.handleChange} />
+                                <Form.Text muted>Nama Kota / Kabupaten / Kota Madya</Form.Text>
+                                {this.validator.message('city', this.state.city, 'required|alpha')}
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label>Sosmed Link Info</Form.Label>
                                 <Form.Control type="text"
                                     name="sosmed_link"
-                                    value={this.state.value}
-                                    onChange={this.handleChange}
-                                    placeholder="Link untuk info terkait" />
+                                    value={this.state.sosmed_link}
+                                    onChange={this.handleChange} />
+                                <Form.Text muted>Link untuk info terkait, misal link FB, IG, lainnya.</Form.Text>
                             </Form.Group>
 
+                            <div>
+                                {showMessage &&
+                                    <div>
+                                        {
+                                            this.state.msgStatus ?
+                                                <Alert variant="success">Data berhasil ditambahkan.</Alert>
+                                                :
+                                                <Alert variant="warning"> Failed. Silakan melengkapi data.</Alert>
+                                        }
+                                    </div>
+                                }
+                            </div>
 
                             <Form.Group>
-                                <Button variant="primary" type="submit">
-                                    Tambahkan
-                                </Button>
+                                <Button variant="primary" type="submit">Kirim</Button>{' '}
+                                <Button variant="outline-dark" href="/">Batal</Button>
                             </Form.Group>
 
                         </Form.Group>
@@ -161,12 +167,9 @@ class LapakForm extends Component {
 
                 {this.state.msgStatus && fireRedirect && (
                     <Redirect
-                        wait={5000}
+                        wait={2000}
                         to={from || '/'} />
                 )}
-
-
-
 
             </Container>
         );
