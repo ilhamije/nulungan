@@ -11,6 +11,8 @@ RUN pip install -r requirements/development.txt
 # Add the rest of the code
 COPY . /app/backend
 
+# RUN python manage.py collectstatic --noinput
+
 # Make port 8000 available for the app
 EXPOSE 8000
 
