@@ -1,3 +1,6 @@
 # Master branches
 Django==3.1.7
+django-environ==0.4.5
+django-extensions==3.1.1
+djangorestframework==3.12.2
 whitenoise==5.2.0
