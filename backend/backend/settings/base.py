@@ -138,6 +138,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-APPEND_SLASH = True
+APPEND_SLASH = False
 
 AUTH_USER_MODEL = "authentication.CustomUser"
