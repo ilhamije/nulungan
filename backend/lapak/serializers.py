@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from lapak.models import LapakModel
+
+from .models import LapakModel
 
 
 class LapakSerializer(serializers.ModelSerializer):
@@ -9,13 +10,13 @@ class LapakSerializer(serializers.ModelSerializer):
             'id',
             'lapak_name',
             'lapak_type',
-            'image_url',
             'city',
             'address',
             'latitude',
             'longitude',
+            'image_url',
             'active',
             'valid',
             'socmed_link',
-            'created'
+            'created_at'
         ]
