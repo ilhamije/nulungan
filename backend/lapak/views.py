@@ -1,28 +1,23 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from .models import LapakModel
 from .serializers import LapakSerializer
-
-
-class PublicLapakList(APIView):
-    """
-    For public or all user (anonymous, registered)
-    """
-    def get(self, request, format=None):
-        lapaks = LapakModel.objects.all()
-        serializer = LapakSerializer(lapaks, many=True)
-        return Response(serializer.data)
 
 
 class LapakList(APIView):
     """
     List all code lapaks, or create a new lapak.
     """
+    permission_classes = (IsAuthenticatedOrReadOnly, )
 
-    permission_classes = (IsAuthenticated, )
+    def get(self, request, format=None):
+        lapaks = LapakModel.objects.all()
+        serializer = LapakSerializer(lapaks, many=True)
+        return Response(serializer.data)
+
     def post(self, request, format=None):
         serializer = LapakSerializer(data=request.data)
         if serializer.is_valid():
