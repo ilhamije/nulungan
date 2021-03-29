@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from backend import settings
 
 
 class LapakModel(models.Model):
@@ -17,6 +18,7 @@ class LapakModel(models.Model):
     socmed_link = models.URLField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(settings.base.AUTH_USER_MODEL, on_delete=models.SET_DEFAULT, default=1)
 
     class Meta:
         ordering=['-created_at']

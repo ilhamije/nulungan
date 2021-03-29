@@ -18,5 +18,6 @@ class LapakSerializer(serializers.ModelSerializer):
             'active',
             'valid',
             'socmed_link',
-            'created_at'
+            'created_at',
+            'created_by'
         ]
