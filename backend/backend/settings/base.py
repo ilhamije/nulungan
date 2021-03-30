@@ -34,7 +34,9 @@ INSTALLED_APPS = [
     'contrib.apps.ContribConfig',
     'lapak',
     'authentication',
+
     'rest_framework',
+    'simple_history',
 ]
 
 REST_FRAMEWORK = {
@@ -66,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'

@@ -19,5 +19,22 @@ class LapakSerializer(serializers.ModelSerializer):
             'valid',
             'socmed_link',
             'created_at',
-            'created_by'
+            'created_by',
+        ]
+
+
+class SuggestEditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LapakModel
+        fields = [
+            'id',
+            'lapak_name',
+            'lapak_type',
+            'city',
+            'address',
+            'latitude',
+            'longitude',
+            'image_url',
+            'socmed_link',
+            'updated_by',
         ]

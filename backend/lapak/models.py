@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from backend import settings
+from simple_history.models import HistoricalRecords
 
 
 class LapakModel(models.Model):
@@ -10,15 +11,19 @@ class LapakModel(models.Model):
     lapak_type = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     address = models.TextField(max_length=255)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
+    latitude = models.DecimalField(
+        max_digits=9, decimal_places=6, blank=True, null=True)
+    longitude = models.DecimalField(
+        max_digits=9, decimal_places=6, blank=True, null=True)
     image_url = models.URLField(blank=True)
     active = models.BooleanField(default=True)
     valid = models.BooleanField(default=False)
     socmed_link = models.URLField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey(settings.base.AUTH_USER_MODEL, on_delete=models.SET_DEFAULT, default=1)
+    created_by = models.ForeignKey(
+        settings.base.AUTH_USER_MODEL, on_delete=models.PROTECT, default=1)
+    history = HistoricalRecords()
 
     class Meta:
         ordering=['-created_at']
