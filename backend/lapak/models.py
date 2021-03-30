@@ -30,4 +30,11 @@ class LapakModel(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return self.lapak_name
+        return self.id
+
+
+class LikeLapakModel(models.Model):
+    lapak_id = models.ForeignKey(LapakModel, on_delete=models.CASCADE, related_name="likes")
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(
+        settings.base.AUTH_USER_MODEL, on_delete=models.CASCADE)
