@@ -3,22 +3,28 @@ import uuid
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from .models import LapakModel, LikeLapakModel
 from .serializers import LapakSerializer, LikeLapakSerializer
+# from .paginations import StandardResultsSetPagination
 
 
-class LapakList(APIView):
+class LapakList(APIView, LimitOffsetPagination):
     """
     List all code lapaks, or create a new lapak.
     """
     permission_classes = (IsAuthenticatedOrReadOnly, )
+    # pagination_class = StandardResultsSetPagination
 
     def get(self, request, format=None):
         lapaks = LapakModel.objects.all()
-        serializer = LapakSerializer(lapaks, many=True)
-        return Response(serializer.data)
+        # serializer = LapakSerializer(lapaks, many=True)
+        # return Response(serializer.data)
+        results = self.paginate_queryset(lapaks, request, view=self)
+        serializer = LapakSerializer(results, many=True)
+        return self.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
         data = request.data
@@ -73,16 +79,15 @@ class LikeLapakList(APIView):
 
     def get_object(self, lapak_id):
         try:
-            return LapakModel.objects.get(id=lapak_id).id
+            return LapakModel.objects.get(id=lapak_id)
         except LapakModel.DoesNotExist:
             return Response({"msg": "Nothing to see here."}, status=status.HTTP_404_NOT_FOUND)
 
-
     def post(self, request, lapak_id, *args, **kwargs):
+        # print(self.kwargs['lapak_id'])
         data = dict()
-        data['lapak'] = self.get_object(lapak_id).hex
+        data['lapak'] = self.get_object(lapak_id).id.hex
         data['user'] = request.user.id
-        print('data:', data)
         serializer = LikeLapakSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

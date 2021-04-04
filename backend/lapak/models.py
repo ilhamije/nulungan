@@ -34,7 +34,10 @@ class LapakModel(models.Model):
 
 
 class LikeLapakModel(models.Model):
-    lapak_id = models.ForeignKey(LapakModel, on_delete=models.CASCADE, related_name="likes")
-    created_at = models.DateTimeField(auto_now_add=True)
+    lapak = models.ForeignKey(LapakModel, on_delete=models.CASCADE, related_name="likes")
     user = models.ForeignKey(
         settings.base.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = [['lapak', 'user']]
