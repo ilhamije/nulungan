@@ -1,30 +1,35 @@
+import uuid
+
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
-from .models import LapakModel
-from .serializers import LapakSerializer
-
-
-class PublicLapakList(APIView):
-    """
-    For public or all user (anonymous, registered)
-    """
-    def get(self, request, format=None):
-        lapaks = LapakModel.objects.all()
-        serializer = LapakSerializer(lapaks, many=True)
-        return Response(serializer.data)
+from .models import LapakModel, LikeLapakModel
+from .serializers import LapakSerializer, LikeLapakSerializer
+# from .paginations import StandardResultsSetPagination
 
 
-class LapakList(APIView):
+class LapakList(APIView, LimitOffsetPagination):
     """
     List all code lapaks, or create a new lapak.
     """
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+    # pagination_class = StandardResultsSetPagination
 
-    permission_classes = (IsAuthenticated, )
+    def get(self, request, format=None):
+        lapaks = LapakModel.objects.all()
+        # serializer = LapakSerializer(lapaks, many=True)
+        # return Response(serializer.data)
+        results = self.paginate_queryset(lapaks, request, view=self)
+        serializer = LapakSerializer(results, many=True)
+        return self.get_paginated_response(serializer.data)
+
     def post(self, request, format=None):
-        serializer = LapakSerializer(data=request.data)
+        data = request.data
+        data['created_by'] = request.user.id
+        serializer = LapakSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -35,6 +40,8 @@ class LapakDetail(APIView):
     """
     Retrieve, update or delete a code lapak.
     """
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+
     def get_object(self, lapak_id):
         try:
             return LapakModel.objects.get(id=lapak_id)
@@ -62,3 +69,27 @@ class LapakDetail(APIView):
         lapak = self.get_object(pk)
         lapak.delete()
         return Response(status=204)
+
+
+class LikeLapakList(APIView):
+    """
+    List all code lapaks, or create a new lapak.
+    """
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+
+    def get_object(self, lapak_id):
+        try:
+            return LapakModel.objects.get(id=lapak_id)
+        except LapakModel.DoesNotExist:
+            return Response({"msg": "Nothing to see here."}, status=status.HTTP_404_NOT_FOUND)
+
+    def post(self, request, lapak_id, *args, **kwargs):
+        # print(self.kwargs['lapak_id'])
+        data = dict()
+        data['lapak'] = self.get_object(lapak_id).id.hex
+        data['user'] = request.user.id
+        serializer = LikeLapakSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -1,8 +1,8 @@
-from django.urls import path
-from .views import PublicLapakList, LapakList, LapakDetail
+from django.urls import path, re_path
+from .views import LapakList, LapakDetail, LikeLapakList
 
 urlpatterns = [
-    path('', PublicLapakList.as_view(), name='public-lapak-list'),
     path('lapaks/', LapakList.as_view(), name='lapak-list'),
-    path('lapaks/<str:lapak_id>/', LapakDetail.as_view(), name='lapak-detail'),
+    path('lapaks/<uuid:lapak_id>/', LapakDetail.as_view(), name='lapak-detail'),
+    path('likes/<uuid:lapak_id>/', LikeLapakList.as_view(), name='likes-detail'),
 ]
