@@ -16,7 +16,6 @@ class LapakList(APIView, LimitOffsetPagination):
     List all code lapaks, or create a new lapak.
     """
     permission_classes = (IsAuthenticatedOrReadOnly, )
-    # pagination_class = StandardResultsSetPagination
 
     def get(self, request, format=None):
         lapaks = LapakModel.objects.all()

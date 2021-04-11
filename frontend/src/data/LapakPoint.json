@@ -1,4 +1,5 @@
-[
+{
+    "results" : [
     {
         "id": "593e9297e17df20c4a237d42",
         "index": 0,
@@ -306,117 +307,6 @@
         "active": 1,
         "valid": 0,
         "socmed_link": ""
-    },
-    {
-        "id": "593e92972f6034590df04c45",
-        "index": 22,
-        "lapak_name": "fulan",
-        "lapak_type": "bakso",
-        "image_url": "http://placekitten.com/200/200",
-        "city": "Temperanceville",
-        "address": "687 Alabama Avenue",
-        "latitude": -33.938195,
-        "longitude": 151.25286,
-        "active": 1,
-        "valid": 0,
-        "socmed_link": ""
-    },
-    {
-        "id": "593e9297aa0e233a421f1a58",
-        "index": 23,
-        "lapak_name": "fulan",
-        "lapak_type": "bakso",
-        "image_url": "http://placekitten.com/200/200",
-        "city": "Cliffside",
-        "address": "739 Vermont Street",
-        "latitude": -33.94209,
-        "longitude": 151.25645,
-        "active": 1,
-        "valid": 0,
-        "socmed_link": ""
-    },
-    {
-        "id": "593e92977526a30b580dcfb2",
-        "index": 24,
-        "lapak_name": "fulan",
-        "lapak_type": "bakso",
-        "image_url": "http://placekitten.com/200/200",
-        "city": "Sunbury",
-        "address": "735 Humboldt Street",
-        "latitude": -33.944276,
-        "longitude": 151.25442,
-        "active": 1,
-        "valid": 0,
-        "socmed_link": ""
-    },
-    {
-        "id": "593e92975141c74b24375bd9",
-        "index": 25,
-        "lapak_name": "fulan",
-        "lapak_type": "bakso",
-        "image_url": "http://placekitten.com/200/200",
-        "city": "Gracey",
-        "address": "617 Charles Place",
-        "latitude": -33.939279,
-        "longitude": 151.25559,
-        "active": 1,
-        "valid": 0,
-        "socmed_link": ""
-    },
-    {
-        "id": "593e9297b3ffeb95bb008453",
-        "index": 26,
-        "lapak_name": "fulan",
-        "lapak_type": "bakso",
-        "image_url": "http://placekitten.com/200/200",
-        "city": "Farmers",
-        "address": "786 George Street",
-        "latitude": -33.943311,
-        "longitude": 151.25781,
-        "active": 1,
-        "valid": 0,
-        "socmed_link": ""
-    },
-    {
-        "id": "593e9297e262c91acd91ab81",
-        "index": 27,
-        "lapak_name": "fulan",
-        "lapak_type": "bakso",
-        "image_url": "http://placekitten.com/200/200",
-        "city": "Mapletown",
-        "address": "711 Sunnyside Avenue",
-        "latitude": -33.943475,
-        "longitude": 151.24929,
-        "active": 1,
-        "valid": 0,
-        "socmed_link": ""
-    },
-    {
-        "id": "593e9297df21e62e0465f91f",
-        "index": 28,
-        "lapak_name": "fulan",
-        "lapak_type": "bakso",
-        "image_url": "http://placekitten.com/200/200",
-        "city": "Snyderville",
-        "address": "403 Lawrence Avenue",
-        "latitude": -33.943007,
-        "longitude": 151.25262,
-        "active": 1,
-        "valid": 0,
-        "socmed_link": ""
-    },
-    {
-        "id": "593e929787f567dccda86910",
-        "index": 29,
-        "lapak_name": "fulan",
-        "lapak_type": "bakso",
-        "image_url": "http://placekitten.com/200/200",
-        "city": "Inkerman",
-        "address": "265 Ocean Court",
-        "latitude": -33.943142,
-        "longitude": 151.25074,
-        "active": 1,
-        "valid": 0,
-        "socmed_link": ""
     }
 ]
+}

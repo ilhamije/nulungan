@@ -7,6 +7,7 @@ import {
 
 import Main from './Main';
 import LapakForm from "./components/Form";
+import LoginForm from "./components/Login";
 import MyNav from './components/Nav';
 
 // This site has 3 pages, all of which are rendered
@@ -32,6 +33,9 @@ class App extends Component {
                         </Route>
                         <Route path="/addlapak">
                             <LapakForm />
+                        </Route>
+                        <Route path="/login">
+                            <LoginForm />
                         </Route>
                     </Switch>
                 </div>

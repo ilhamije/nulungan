@@ -30,7 +30,7 @@ class LapakModel(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return self.id
+        return str(self.id)
 
 
 class LikeLapakModel(models.Model):

@@ -14,8 +14,8 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lapaks: data,
-      activeLapak: data[0],
+      lapaks: data.results,
+      activeLapak: data.results[0],
       // filterIsVisible: false,
       lapakFormIsVisible: false,
       filterLapakType: 'any',
@@ -36,7 +36,7 @@ class Main extends Component {
   componentDidMount() {
     fetch('/lapaks')
       .then((res) => res.json())
-      .then((restext) => this.setState({ lapaks: restext, activeLapak: restext[0] }))
+      .then((restext) => this.setState({ lapaks: restext.results, activeLapak: restext.results[0]}))
   }
 
   handleFilterChange(e) {

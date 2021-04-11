@@ -7,15 +7,12 @@ import SimpleReactValidator from 'simple-react-validator';
 import './DefaultStyle.css';
 
 
-class LapakForm extends Component {
+class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lapak_name: '' || 'Fulan',
-            lapak_type: '',
-            address: '',
-            city: '',
-            sosmed_link: '',
+            email: '',
+            password: '',
             fireRedirect: false,
             showMessage: false,
             msgStatus: false
@@ -43,7 +40,7 @@ class LapakForm extends Component {
             this.setState({ fireRedirect: false });
         }
 
-        fetch('/lapaks/', {
+        fetch('/users/token/obtain/', {
             method: 'post',
             body: JSON.stringify(this.state),
             headers: {
@@ -52,13 +49,15 @@ class LapakForm extends Component {
             },
             // We convert the React state to JSON and send it as the POST body
         })
-        .then(function (response) {
+        // .then(function (response) {
+        .then(response => {
             if (!response.ok) {
                 console.log('It\'s NOT working. ');
                 this.setState({ msgStatus: false });
+            } else {
+                console.log('is it working?')
+                console.log(response)
             }
-            // console.log('is it working?')
-            // console.log(response)
             return response.json();
         })
         .then(() => {
@@ -84,63 +83,29 @@ class LapakForm extends Component {
                 <Form
                     style={{ marginBottom: "30px", marginTop: "50px" }}
                     ref={(ref) => this.formRef = ref}
-                    className="LapakForm"
+                    className="LoginForm"
                     onSubmit={this.handleSubmit}>
 
 
                     <Form.Row>
                         <Form.Group as={Col} md={{span:8, offset: 2}}>
-                            <h2 className="h1-title">Tambahkan Lapak</h2>
+                            <h2 className="h1-title">Login dulu ya kakak.</h2>
                             <Form.Group>
-                                <Form.Label>Nama</Form.Label>
-                                <Form.Control type="text"
-                                    name="lapak_name"
-                                    value={this.state.lapak_name}
-                                    onChange={this.handleChange}
-                                    placeholder="Nama si fulan (jika diketahui)" />
-                                <Form.Text muted>Ubah bagian ini jika kamu tau nama beliau.</Form.Text>
-                                {this.validator.message('lapak_name', this.state.lapak_name, 'alpha')}
-                            </Form.Group>
-
-                            <Form.Group>
-                                <Form.Label>Jenis Lapak</Form.Label>
-                                <Form.Control type="text"
-                                    name="lapak_type"
-                                    value={this.state.lapak_type}
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email"
+                                    name="email"
+                                    value={this.state.email}
                                     onChange={this.handleChange} />
-                                <Form.Text muted>ex: peyek, bakso, dll</Form.Text>
-                                {this.validator.message('lapak_type', this.state.lapak_type, 'required|alpha')}
-                            </Form.Group>
-
-
-                            <Form.Group>
-                                <Form.Label>Alamat</Form.Label>
-                                <Form.Control type="text"
-                                    name="address"
-                                    value={this.state.address}
-                                    onChange={this.handleChange}
-                                    />
-                                <Form.Text muted>Alamat / nama jalan atau kawasan kelurahan atau patokan</Form.Text>
-                                {this.validator.message('address', this.state.address, 'required|alpha')}
+                                {this.validator.message('email', this.state.email, 'required')}
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Kota</Form.Label>
-                                <Form.Control type="text"
-                                    name="city"
-                                    value={this.state.city}
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password"
+                                    name="password"
+                                    value={this.state.password}
                                     onChange={this.handleChange} />
-                                <Form.Text muted>Nama Kota / Kabupaten / Kota Madya</Form.Text>
-                                {this.validator.message('city', this.state.city, 'required|alpha')}
-                            </Form.Group>
-
-                            <Form.Group>
-                                <Form.Label>Sosmed Link Info</Form.Label>
-                                <Form.Control type="text"
-                                    name="sosmed_link"
-                                    value={this.state.sosmed_link}
-                                    onChange={this.handleChange} />
-                                <Form.Text muted>Link untuk info terkait, misal link FB, IG, lainnya.</Form.Text>
+                                {this.validator.message('password', this.state.password, 'required')}
                             </Form.Group>
 
                             <div>
@@ -148,16 +113,16 @@ class LapakForm extends Component {
                                     <div>
                                         {
                                             this.state.msgStatus ?
-                                                <Alert variant="success">Data berhasil ditambahkan.</Alert>
+                                                <Alert variant="success"> Asyik! Berhasil, kak.</Alert>
                                                 :
-                                                <Alert variant="warning"> Failed. Silakan melengkapi data.</Alert>
+                                                <Alert variant="warning"> Yahh, gak bisa login nih kak.</Alert>
                                         }
                                     </div>
                                 }
                             </div>
 
                             <Form.Group>
-                                <Button variant="primary" type="submit">Kirim</Button>{' '}
+                                <Button variant="primary" type="submit">Masuk</Button>{' '}
                                 <Button variant="outline-dark" href="/">Batal</Button>
                             </Form.Group>
 
@@ -165,21 +130,21 @@ class LapakForm extends Component {
                     </Form.Row>
                 </Form>
 
-                {this.state.msgStatus && fireRedirect && (
+                {/* {this.state.msgStatus && fireRedirect && (
                     <Redirect
                         wait={2000}
-                        to={from || '/addlapak'} />
-                )}
+                        to={from || '/'} />
+                )} */}
 
             </Container>
         );
     }
 }
 
-LapakForm.propTypes = {
+LoginForm.propTypes = {
     // clearLapakForm: PropTypes.func.isRequired,
     // handleLapakFormSubmit: PropTypes.func.isRequired,
     // toggleLapakForm: PropTypes.func.isRequired,
 };
 
-export default LapakForm;
+export default LoginForm;
