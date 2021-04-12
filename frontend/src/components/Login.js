@@ -53,8 +53,8 @@ class LoginForm extends Component {
         // .then(data => console.log(JSON.stringify(data)))
         .then(data => {
             console.log(JSON.stringify(data));
-            localStorage.setItem('accessToken', JSON.stringify(data.access));
-            localStorage.setItem('refreshToken', JSON.stringify(data.refresh));
+            localStorage.setItem('accessToken', data.access);
+            localStorage.setItem('refreshToken', data.refresh);
             this.setState({ msgStatus: true });
         })
         .then(() => {

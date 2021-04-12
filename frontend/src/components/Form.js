@@ -35,6 +35,8 @@ class LapakForm extends Component {
     handleSubmit = (event) => {
         // alert('A form was submitted: ' + this.state);
         console.log('hey submit', this.state)
+        var auth = localStorage.getItem('accessToken');
+        console.log(auth)
 
 
         if (!this.validator.allValid()) {
@@ -49,16 +51,17 @@ class LapakForm extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
+                'Authorization': 'JWT ' + auth,
             },
             // We convert the React state to JSON and send it as the POST body
         })
         .then(function (response) {
             if (!response.ok) {
                 console.log('It\'s NOT working. ');
-                this.setState({ msgStatus: false });
             }
             // console.log('is it working?')
             // console.log(response)
+            // this.setState({ msgStatus: true });
             return response.json();
         })
         .then(() => {
