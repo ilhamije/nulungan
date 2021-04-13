@@ -3,6 +3,7 @@ import { Redirect } from 'react-router'
 // import PropTypes from 'prop-types';
 import { Container, Col, Form, Button, Alert } from 'react-bootstrap';
 import SimpleReactValidator from 'simple-react-validator';
+import jwt from 'jsonwebtoken';
 
 import './DefaultStyle.css';
 
@@ -18,7 +19,8 @@ class LapakForm extends Component {
             sosmed_link: '',
             fireRedirect: false,
             showMessage: false,
-            msgStatus: false
+            msgStatus: false,
+            isLoggedIn: false,
         };
         this.validator = new SimpleReactValidator({
             messages: {
@@ -28,16 +30,27 @@ class LapakForm extends Component {
         });
     }
 
+    componentDidMount() {
+        const token = localStorage.getItem('accessToken');
+        if (token !== null) {
+            try {
+                var decoded = jwt.verify(token, '9g+a!g^n@31z_#@1a35vrf)28waw3b5e03xhed9p!p66+ll*)j');
+                console.log(decoded); // bar
+                this.setState({ isLoggedIn: true });
+            } catch (err) {
+                console.log(err);
+                this.setState({ isLoggedIn: false });
+            }
+        }
+    }
+
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
     }
 
     handleSubmit = (event) => {
-        // alert('A form was submitted: ' + this.state);
-        console.log('hey submit', this.state)
-        var auth = localStorage.getItem('accessToken');
-        console.log(auth)
-
+        // console.log('hey submit', this.state)
+        let auth = localStorage.getItem('accessToken');
 
         if (!this.validator.allValid()) {
             this.validator.showMessages();
@@ -55,23 +68,13 @@ class LapakForm extends Component {
             },
             // We convert the React state to JSON and send it as the POST body
         })
-        .then(function (response) {
-            if (!response.ok) {
-                console.log('It\'s NOT working. ');
-            }
-            // console.log('is it working?')
-            // console.log(response)
-            // this.setState({ msgStatus: true });
-            return response.json();
-        })
+        .then(function (response) { return response.json(); })
         .then(() => {
             this.setState({ msgStatus: true });
             window.setTimeout(
-                () => this.setState({ fireRedirect: true }), 3000);
+                () => this.setState({ fireRedirect: true }), 2000);
         })
-        .catch(function (error) {
-            console.log(error);
-        });
+        .catch(function (error) { console.log(error); });
 
         this.setState({ showMessage: true });
         event.preventDefault();
@@ -82,6 +85,14 @@ class LapakForm extends Component {
     render() {
         const { from } = this.props.location || '/'
         const { showMessage, fireRedirect } = this.state
+        // console.log(this.state.isLoggedIn)
+
+        if (this.state.isLoggedIn === 'false') {
+            return (
+                <Redirect to={'/login'} />
+            );
+        }
+
         return (
             <Container>
                 <Form
@@ -170,8 +181,8 @@ class LapakForm extends Component {
 
                 {this.state.msgStatus && fireRedirect && (
                     <Redirect
-                        wait={2000}
-                        to={from || '/addlapak'} />
+                        wait={1000}
+                        to={from || '/'} />
                 )}
 
             </Container>

@@ -15,7 +15,8 @@ class LoginForm extends Component {
             password: '',
             fireRedirect: false,
             showMessage: false,
-            msgStatus: false
+            msgStatus: false,
+            isLoggedIn: false,
         };
         this.validator = new SimpleReactValidator({
             messages: {
@@ -90,7 +91,8 @@ class LoginForm extends Component {
                                 <Form.Control type="email"
                                     name="email"
                                     value={this.state.email}
-                                    onChange={this.handleChange} focus />
+                                    onChange={this.handleChange}
+                                    focus="true" />
                                 {this.validator.message('email', this.state.email, 'required')}
                             </Form.Group>
 

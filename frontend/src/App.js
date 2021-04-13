@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import Main from './Main';
-import LapakForm from "./components/Form";
+import LapakForm from "./components/LapakForm";
 import LoginForm from "./components/Login";
 import MyNav from './components/Nav';
 
