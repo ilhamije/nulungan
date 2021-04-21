@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { Nav, Navbar, Button } from 'react-bootstrap';
 import logo from './../images/nulungan-inline-25.png'
+// import AddLapakButton from './AddLapakButton';
 
 
 class SimpleNav extends Component {
@@ -21,8 +22,9 @@ class SimpleNav extends Component {
                 <Navbar.Collapse className="justify-content-end">
                     <Nav>
                         <Nav.Item>
+                            {/* <AddLapakButton /> */}
                             <Nav.Link href="/addlapak">
-                                <Button size="sm" variant="dark">Add</Button>
+                                <Button size="sm" variant="dark">Add Lapak</Button>
                             </Nav.Link>
                         </Nav.Item>
                     </Nav>

@@ -30,10 +30,12 @@ class LapakForm extends Component {
         });
     }
 
-    componentDidMount() {
+    handleAuth() {
         const token = localStorage.getItem('accessToken');
+        // console.log(token)
         if (token !== null) {
             try {
+                // jwt.verify(token, '9g+a!g^n@31z_#@1a35vrf)28waw3b5e03xhed9p!p66+ll*)j');
                 var decoded = jwt.verify(token, '9g+a!g^n@31z_#@1a35vrf)28waw3b5e03xhed9p!p66+ll*)j');
                 console.log(decoded); // bar
                 this.setState({ isLoggedIn: true });
@@ -42,6 +44,7 @@ class LapakForm extends Component {
                 this.setState({ isLoggedIn: false });
             }
         }
+        console.log('isLoggedIn: ', this.state.isLoggedIn);
     }
 
     handleChange = (event) => {
@@ -49,7 +52,6 @@ class LapakForm extends Component {
     }
 
     handleSubmit = (event) => {
-        // console.log('hey submit', this.state)
         let auth = localStorage.getItem('accessToken');
 
         if (!this.validator.allValid()) {
@@ -83,11 +85,12 @@ class LapakForm extends Component {
 
 
     render() {
+
         const { from } = this.props.location || '/'
         const { showMessage, fireRedirect } = this.state
-        // console.log(this.state.isLoggedIn)
 
-        if (this.state.isLoggedIn === 'false') {
+        console.log(this.state.isLoggedIn)
+        if (this.state.isLoggedIn === false) {
             return (
                 <Redirect to={'/login'} />
             );
@@ -95,6 +98,7 @@ class LapakForm extends Component {
 
         return (
             <Container>
+                {this.handleAuth()}
                 <Form
                     style={{ marginBottom: "30px", marginTop: "50px" }}
                     ref={(ref) => this.formRef = ref}
@@ -123,7 +127,7 @@ class LapakForm extends Component {
                                     value={this.state.lapak_type}
                                     onChange={this.handleChange} />
                                 <Form.Text muted>ex: peyek, bakso, dll</Form.Text>
-                                {this.validator.message('lapak_type', this.state.lapak_type, 'required|alpha')}
+                                {this.validator.message('lapak_type', this.state.lapak_type, 'required')}
                             </Form.Group>
 
 

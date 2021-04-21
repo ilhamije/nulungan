@@ -32,7 +32,7 @@ class LoginForm extends Component {
 
     handleSubmit = (event) => {
         // alert('A form was submitted: ' + this.state);
-        console.log('hey submit', this.state)
+        // console.log('hey submit', this.state)
 
 
         if (!this.validator.allValid()) {
@@ -53,7 +53,7 @@ class LoginForm extends Component {
         .then(response => response.json())
         // .then(data => console.log(JSON.stringify(data)))
         .then(data => {
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
             localStorage.setItem('accessToken', data.access);
             localStorage.setItem('refreshToken', data.refresh);
             this.setState({ msgStatus: true });
@@ -73,6 +73,7 @@ class LoginForm extends Component {
 
     render() {
         const { from } = this.props.location || '/'
+        // console.log({from})
         const { showMessage, fireRedirect } = this.state
         return (
             <Container>
