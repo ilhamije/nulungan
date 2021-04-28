@@ -1,45 +1,38 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router'
+import React, { useState } from 'react';
+// import { Redirect } from 'react-router'
 // import PropTypes from 'prop-types';
 import { Container, Col, Form, Button, Alert } from 'react-bootstrap';
-import SimpleReactValidator from 'simple-react-validator';
+// import SimpleReactValidator from 'simple-react-validator';
+// import useValidator from 'simple-react-validator-hooks';
 
 import './DefaultStyle.css';
 
 
-class LoginForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-            fireRedirect: false,
-            showMessage: false,
-            msgStatus: false,
-            isLoggedIn: false,
-        };
-        this.validator = new SimpleReactValidator({
-            messages: {
-              default: 'Bagian ini wajib.'
-            },
-            element: message => <div className="invalid-msg"><small>{message}</small></div>
-        });
+function LoginForm() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    // const [fireRedirect, setFireRedirect] = useState('false');
+    const [showMessage, setShowMessage] = useState(false);
+    const [msgStatus, setMsgStatus] = useState(false);
+
+    const handleEmailInput = e => {
+        setEmail(e.target.value);
     }
 
-    handleChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
+    const handlePasswordInput = e => {
+        setPassword(e.target.value);
     }
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         // alert('A form was submitted: ' + this.state);
         // console.log('hey submit', this.state)
 
-
-        if (!this.validator.allValid()) {
-            this.validator.showMessages();
-            this.forceUpdate();
-            this.setState({ fireRedirect: false });
-        }
+        // if (validator.allValid()) {
+        //     console.log('Submit Data')
+        // } else {
+        //     // turn on validation message and re-render
+        //     showValidationMessage(true)
+        // }
 
         fetch('/users/token/obtain/', {
             method: 'post',
@@ -56,87 +49,80 @@ class LoginForm extends Component {
             // console.log(JSON.stringify(data));
             localStorage.setItem('accessToken', data.access);
             localStorage.setItem('refreshToken', data.refresh);
-            this.setState({ msgStatus: true });
+            // this.setState({ msgStatus: true });
+            setMsgStatus(true);
         })
-        .then(() => {
-            window.setTimeout(
-                () => this.setState({ fireRedirect: true }), 3000);
-        })
+        // .then(() => {
+        //     window.setTimeout(() => setFireRedirect(true))
+        // })
         .catch(error => console.log(error));
 
-
-        this.setState({ showMessage: true });
+        // this.setState({ showMessage: true });
+        setShowMessage(true);
         event.preventDefault();
-        this.formRef.reset();
     }
 
-
-    render() {
-        const { from } = this.props.location || '/'
-        // console.log({from})
-        const { showMessage, fireRedirect } = this.state
-        return (
-            <Container>
-                <Form
-                    style={{ marginBottom: "30px", marginTop: "50px" }}
-                    ref={(ref) => this.formRef = ref}
-                    className="LoginForm"
-                    onSubmit={this.handleSubmit}>
+    return (
+        <Container>
+            <Form
+                style={{ marginBottom: "30px", marginTop: "50px" }}
+                className="LoginForm"
+                onSubmit={handleSubmit}>
 
 
-                    <Form.Row>
-                        <Form.Group as={Col} md={{span:8, offset: 2}}>
-                            <h2 className="h1-title">Login dulu ya kakak.</h2>
-                            <Form.Group>
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="email"
-                                    name="email"
-                                    value={this.state.email}
-                                    onChange={this.handleChange}
-                                    focus="true" />
-                                {this.validator.message('email', this.state.email, 'required')}
-                            </Form.Group>
-
-                            <Form.Group>
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password"
-                                    name="password"
-                                    value={this.state.password}
-                                    onChange={this.handleChange} />
-                                {this.validator.message('password', this.state.password, 'required')}
-                            </Form.Group>
-
-                            <div>
-                                {showMessage &&
-                                    <div>
-                                        {
-                                            this.state.msgStatus ?
-                                                <Alert variant="success"> Asyik! Berhasil, kak.</Alert>
-                                                :
-                                                <Alert variant="warning"> Yahh, gak bisa login nih kak.</Alert>
-                                        }
-                                    </div>
-                                }
-                            </div>
-
-                            <Form.Group>
-                                <Button variant="primary" type="submit">Masuk</Button>{' '}
-                                <Button variant="outline-dark" href="/">Batal</Button>
-                            </Form.Group>
-
+                <Form.Row>
+                    <Form.Group as={Col} md={{span:8, offset: 2}}>
+                        <h2 className="h1-title">Login dulu ya kakak.</h2>
+                        <Form.Group>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="email"
+                                name="email"
+                                value={email}
+                                onChange={handleEmailInput}
+                                focus="true" />
+                            {/* {validator.message('email', email, 'required')} */}
                         </Form.Group>
-                    </Form.Row>
-                </Form>
 
-                {this.state.msgStatus && fireRedirect && (
-                    <Redirect
-                        wait={2000}
-                        to={from || '/'} />
-                )}
+                        <Form.Group>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password"
+                                name="password"
+                                value={password}
+                                onChange={handlePasswordInput} />
+                            {/* {validator.message('password', password, 'required')} */}
+                        </Form.Group>
 
-            </Container>
-        );
-    }
+                        <div>
+                            {showMessage &&
+                                <div>
+                                    {
+                                        msgStatus ?
+                                            <Alert variant="success"> Asyik! Berhasil, kak.</Alert>
+                                            :
+                                            <Alert variant="warning"> Yahh, gak bisa login nih kak.</Alert>
+                                    }
+                                </div>
+                            }
+                        </div>
+
+                        <Form.Group>
+                            <Button variant="primary" type="submit">Masuk</Button>{' '}
+                            <Button variant="outline-dark" href="/">Batal</Button>
+                        </Form.Group>
+
+                    </Form.Group>
+                </Form.Row>
+            </Form>
+
+            {/* {msgStatus && fireRedirect && (
+                // <Redirect
+                //     wait={2000}
+                //     to={'/'} />
+            )} */}
+
+        </Container>
+    );
+
 }
 
 LoginForm.propTypes = {
