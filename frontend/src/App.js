@@ -27,6 +27,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Main} />
                     <Route path="/addlapak" component={LapakForm} />
+
                 </Switch>
             </div>
         </Router>
