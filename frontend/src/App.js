@@ -9,9 +9,16 @@ import Main from './Main';
 import LapakForm from "./components/LapakForm";
 import LoginForm from "./components/Login";
 import MyNav from './components/Nav';
+import useToken from './useToken';
 
 
-function App(props) {
+function App() {
+    const { token, setToken } = useToken();
+
+    if(!token) {
+        return <LoginForm setToken={setToken} />
+    }
+
     return (
         <Router>
             <div>
@@ -20,7 +27,6 @@ function App(props) {
                 <Switch>
                     <Route exact path="/" component={Main} />
                     <Route path="/addlapak" component={LapakForm} />
-                    <Route path="/login" component={LoginForm} />
                 </Switch>
             </div>
         </Router>

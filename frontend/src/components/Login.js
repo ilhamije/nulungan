@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 // import { Redirect } from 'react-router'
 // import PropTypes from 'prop-types';
-import { Container, Col, Form, Button, Alert } from 'react-bootstrap';
+import { Container, Col, Form, Button } from 'react-bootstrap';
 // import SimpleReactValidator from 'simple-react-validator';
 // import useValidator from 'simple-react-validator-hooks';
 
 import './DefaultStyle.css';
 
 
-function LoginForm() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    // const [fireRedirect, setFireRedirect] = useState('false');
-    const [showMessage, setShowMessage] = useState(false);
-    const [msgStatus, setMsgStatus] = useState(false);
+
+async function loginUser(credentials) {
+    return fetch('/users/token/obtain/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials)
+    })
+        .then(data => data.json())
+}
+
+function LoginForm({ setToken }) {
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
 
     const handleEmailInput = e => {
         setEmail(e.target.value);
@@ -23,43 +32,14 @@ function LoginForm() {
         setPassword(e.target.value);
     }
 
-    const handleSubmit = (event) => {
-        // alert('A form was submitted: ' + this.state);
-        // console.log('hey submit', this.state)
 
-        // if (validator.allValid()) {
-        //     console.log('Submit Data')
-        // } else {
-        //     // turn on validation message and re-render
-        //     showValidationMessage(true)
-        // }
-
-        fetch('/users/token/obtain/', {
-            method: 'post',
-            body: JSON.stringify(this.state),
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            // We convert the React state to JSON and send it as the POST body
-        })
-        .then(response => response.json())
-        // .then(data => console.log(JSON.stringify(data)))
-        .then(data => {
-            // console.log(JSON.stringify(data));
-            localStorage.setItem('accessToken', data.access);
-            localStorage.setItem('refreshToken', data.refresh);
-            // this.setState({ msgStatus: true });
-            setMsgStatus(true);
-        })
-        // .then(() => {
-        //     window.setTimeout(() => setFireRedirect(true))
-        // })
-        .catch(error => console.log(error));
-
-        // this.setState({ showMessage: true });
-        setShowMessage(true);
-        event.preventDefault();
+    const handleSubmit = async e => {
+        e.preventDefault();
+        const token = await loginUser({
+            email, password
+        });
+        // console.log(token);
+        setToken(token);
     }
 
     return (
@@ -91,7 +71,7 @@ function LoginForm() {
                                 onChange={handlePasswordInput} />
                             {/* {validator.message('password', password, 'required')} */}
                         </Form.Group>
-
+{/*
                         <div>
                             {showMessage &&
                                 <div>
@@ -103,7 +83,7 @@ function LoginForm() {
                                     }
                                 </div>
                             }
-                        </div>
+                        </div> */}
 
                         <Form.Group>
                             <Button variant="primary" type="submit">Masuk</Button>{' '}
